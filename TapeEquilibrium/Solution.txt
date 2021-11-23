@@ -1,0 +1,27 @@
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 
+    int arr_sum=0;
+    for (int i = 0; i < A.length; i++)
+    {
+        arr_sum+=A[i];
+    }
+    int first_part_sum=0;
+    int second_part_sum=arr_sum;
+    int cur_diff=0;
+    int min_dif=Integer.MAX_VALUE;
+
+    for (int i = 0; i < A.length-1; i++)
+    {
+        first_part_sum+=A[i];
+        second_part_sum-=A[i];
+        cur_diff=Math.abs(first_part_sum-second_part_sum);
+        if (cur_diff<min_dif)
+            min_dif=cur_diff;
+
+    }
+    return min_dif;
+
+        
+    }
+}
