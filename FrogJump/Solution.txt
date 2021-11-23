@@ -1,0 +1,13 @@
+class Solution {
+    public int solution(int X, int Y, int D) {
+        // write your code in Java SE 8
+        double jump=0;
+        if(Y!=0)
+             jump= (((Y-X)/(double)D) );
+        //System.out.println(jump+" jump ");
+        //System.out.println((jump%1)+" jump ");
+        if (jump%1 !=0)
+            return (int) jump+1;
+        return (int) jump;
+    }
+}
