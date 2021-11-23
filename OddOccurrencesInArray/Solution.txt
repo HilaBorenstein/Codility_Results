@@ -1,0 +1,40 @@
+
+// you can also use imports, for example:
+// import java.util.*;
+import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        Map<Integer,Integer> count_occur=new HashMap<Integer,Integer> ();
+
+      int i=0;
+    for (i = 0; i < A.length; i++)
+  {
+    if (count_occur.containsKey(A[i]))
+    {
+      int count= count_occur.get(A[i])+1;
+       count_occur.put(A[i],count);
+    }
+       
+  else 
+    {
+    count_occur.put(A[i],1);
+    }
+  }
+
+  for (Map.Entry<Integer,Integer> entry : count_occur.entrySet()) //using map.entrySet() for iteration  
+    {  
+      //System.out.println("int: " + entry.getKey() + ", count: " + entry.getValue());   
+      if(entry.getValue()%2!=0)
+        return entry.getKey() ;   
+    }  
+
+return 0;
+
+    }
+   
+}
