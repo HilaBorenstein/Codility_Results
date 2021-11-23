@@ -1,0 +1,37 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int N) {
+        int max_gap=0;
+        int cur_gap=0;
+        
+        // write your code in Java SE 8
+        String bin= Integer.toBinaryString(N);
+
+        for (int i = 0; i < bin.length(); i++)
+	        {
+
+	        	if(bin.charAt(i)=='1')
+                //check the gap!
+                {
+                    if(cur_gap>max_gap)
+                        max_gap=cur_gap;
+                    cur_gap=0;
+                }
+                else
+                    cur_gap++;
+
+              //  System.out.print(bin.charAt(i));
+            } 
+
+		//System.out.println(", "); 
+       // System.out.println("Binary = " +bin );
+
+
+    return max_gap;
+    }
+}
