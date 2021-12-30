@@ -1,0 +1,43 @@
+
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+
+        int min_avg_index=0;
+        double min_avg_value=Double.MAX_VALUE;
+
+        
+        // write your code in Java SE 8
+        for(int i=0;i<A.length-2;i++)
+        {
+           double  avg2= (A[i]+A[i+1])*1.0/2;
+           double  avg3= (A[i]+A[i+1]+A[i+2])*1.0/3;
+            //System.out.print(avg2[i]+" ");
+            if (avg2<min_avg_value)
+                {
+                    min_avg_value=avg2;
+                    min_avg_index=i;
+                }
+            else if(avg3<min_avg_value)
+                {
+                    min_avg_value=avg3;
+                    min_avg_index=i;
+                }
+        }
+
+            double tmp=(A[A.length-1]+A[A.length-2])*1.0/2 ;
+            if (tmp<min_avg_value)//for last 2 indexes
+                {
+                    min_avg_value=tmp;
+                    min_avg_index=A.length-2;
+                }
+
+        return min_avg_index;
+    }
+}
+

@@ -1,0 +1,31 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int A, int B, int K) {
+        // write your code in Java SE 8
+        if(K==0) return 0;
+
+        int upper_bound=B;
+        int lower_bound=A;
+
+        while((lower_bound % K !=0)&&(lower_bound<B))
+            lower_bound++;
+
+        while((upper_bound % K !=0)&&(upper_bound>A))
+            upper_bound--;
+
+        //System.out.println(lower_bound);
+        //System.out.println(upper_bound);
+
+        if(upper_bound==lower_bound)
+        {
+            if (upper_bound%K ==0) return 1;
+            else return 0;
+        }
+        else if (upper_bound<lower_bound)
+            return 0;
+        else return ((upper_bound-lower_bound)/K +1);

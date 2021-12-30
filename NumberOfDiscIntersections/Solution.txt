@@ -1,0 +1,44 @@
+
+// you can also use imports, for example:
+ import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        int [] start_indexes=new int[A.length];
+        int [] close_indexes=new int [A.length];
+
+        for (int i=0;i<A.length;i++)
+        {
+            start_indexes[i]=i-A[i];
+            close_indexes[i]=i+A[i];
+        }
+
+        Arrays.sort(start_indexes);
+        Arrays.sort(close_indexes);
+
+        int active_discs_amount=0;
+        int count_intersections=0;
+
+        int j=0;
+        int i=0;
+
+        while(i<A.length&&j<A.length){
+             if(start_indexes[i]<=close_indexes[j]){
+                   count_intersections+=active_discs_amount; 
+                   active_discs_amount++; 
+                   i++;
+             }else{
+                 active_discs_amount--;
+                 j++;
+             }
+             if(count_intersections>10000000)return -1;
+            }
+
+
+    return count_intersections;
+    }
+}

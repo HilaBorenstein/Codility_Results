@@ -1,0 +1,49 @@
+
+// you can also use imports, for example:
+ import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+//Put all downstream swimming fishes on a stack. Any upstream swimming fish has to fight(eat) all fishes /
+//on the stack. If there is no fish on the stack, the fish survives. If the stack has some downstream f/
+//fishes at the end, they also survive.
+
+
+
+class Solution {
+    public int solution(int[] A, int[] B) {
+        // write your code in Java SE 8
+        
+        if(A.length<2) return A.length;
+
+        Stack <Integer> s=new Stack<Integer>();
+        int alive=0;
+
+        for (int i = 0; i < A.length; i++)
+        {
+                if(B[i]==0)
+                {
+                    while(!s.isEmpty())
+                    {
+                        if(s.peek()>A[i])
+                            break;
+                        else 
+                        {
+                          s.pop();    
+                        }
+                        
+                    }
+                    if (s.isEmpty())  alive++;
+                }
+                else
+                {
+                    s.push(A[i]);
+                }
+         }  
+       return s.size()+alive;
+
+    }
+}
+
+
+

@@ -1,0 +1,23 @@
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        boolean [] permutation=new boolean[A.length];
+        int count_digits=0;
+        for(int i=0;i<A.length;i++)
+        {
+            int cur_digit=A[i];
+            if (cur_digit>0 && cur_digit<=A.length)
+            {
+                if (!permutation[cur_digit-1])
+                {
+                    permutation[cur_digit-1]=true;
+                    count_digits++;
+                }
+            }
+        }
+
+     if (count_digits==A.length)
+         return 1;
+    return 0;
+    } 
+}

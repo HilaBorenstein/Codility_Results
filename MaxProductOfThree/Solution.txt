@@ -1,0 +1,93 @@
+
+
+//My solution look long but more efficient takes o(N)
+
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        //we have 2 options to recieve product of 3 numbers with negativew:
+        //3 largest positive numbers
+        //2 smallest negative numbers and one largest positive numbers
+        if (A.length<3) return 0;
+        if (A.length==3) return(A[0]*A[1]*A[2]);
+        if(A.length==4) 
+            {
+                int tmp= Math.max(A[0]*A[2]*A[3],A[0]*A[1]*A[2]);
+                int tmp2= Math.max(A[0]*A[1]*A[3],A[1]*A[2]*A[3]);
+                return Math.max(tmp,tmp2);
+
+            }
+
+        int max1=0;int max2=0;int max3=0;//max1 is the largest
+        int min1=1;int min2=1;//min1 is the smallest
+
+        //set max and min
+        min1= Math.min(A[0],A[1]);
+        min2=Math.max(A[0],A[1]);
+
+        if ((A[0]>=A[1])&&(A[0]>=A[2]))
+        {
+            max1=A[0];
+            max2=Math.max(A[1],A[2]);
+            max3=Math.min(A[1],A[2]);
+        }
+        else  if ((A[1]>=A[0])&&(A[1]>=A[2]))
+        {
+            max1=A[1];
+            max2=Math.max(A[0],A[2]);
+            max3=Math.min(A[0],A[2]);
+        }
+         else  if ((A[2]>=A[1])&&(A[2]>=A[0]))
+        {
+            max1=A[2];
+            max2=Math.max(A[0],A[1]);
+            max3=Math.min(A[0],A[1]);
+        }
+
+        
+        for (int i=3;i< A.length;i++)
+        {
+            if(A[i]>max1)//chack 3 largest postive numbers
+            {
+                max3=max2;
+                max2=max1;
+                max1=A[i];
+            }
+            else if (A[i]>max2)//and we know you are definitly smaller or equal max3
+            {
+                max3=max2;
+                max2=A[i];
+            }
+            else if (A[i]>=max3)
+            {
+                max3=A[i];
+            }
+
+             if(A[i]<min1)//chack 2 smallest postive numbers
+            {
+                min2=min1;
+                min1=A[i];
+
+            }
+            else if (A[i]<min2)//and we know you are definitly smaller or equal max3
+            {
+                min2=A[i];
+            }
+
+        }
+        //System.out.println( max1+" "+max2+" "+max3);
+        //System.out.print( min1+" "+min2);
+        return Math.max((min1*min2*max1),(max1*max2*max3));
+
+    }
+}
+
+    
+
+

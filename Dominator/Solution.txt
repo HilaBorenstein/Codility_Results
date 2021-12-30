@@ -1,0 +1,39 @@
+// you can also use imports, for example:
+ import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+       
+        int candidate=-1;
+        // write your code in Java SE 8
+        Stack<Integer> s=new Stack<Integer>();//will keep indexes
+        for (int i = 0; i < A.length; i++)  
+        {    
+            if((!s.isEmpty())&&(A[s.peek()]!=A[i]))
+            {
+                s.pop();
+            }
+             else
+                s.push(i);
+        }
+        if(s.isEmpty())      
+         return -1;
+
+        candidate=A[s.peek()];
+        int count=0;
+        for (int i = 0; i < A.length; i++)  
+        {    
+            if(A[i]==candidate)
+            {
+                count++;
+            }
+            if(count>(A.length/2))
+                return s.peek();       
+        }
+        return -1;
+
+    }
+}

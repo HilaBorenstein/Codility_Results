@@ -1,0 +1,33 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        //calculate for each i the maximum sum of the subarr the end in i
+
+        if (A.length ==0)
+            return 0;
+
+        int prev_sub_arr_sum=A[0];//0;
+        int max_slice= A[0];//=Integer.MIN_VALUE;
+           
+
+        for(int i=1;i<A.length;i++)
+        {
+            int cur_max_slice= max(prev_sub_arr_sum+A[i],A[i]);
+            if (cur_max_slice>max_slice)
+                max_slice=cur_max_slice;
+            prev_sub_arr_sum=cur_max_slice;
+        }
+
+        return max_slice;
+    }
+
+    public int max(int a,int b) {
+      return (a>b? a:b);
+    }
+
+}

@@ -1,0 +1,36 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        //the idea: keep ary of sums
+        //index 1 indicated the sum from index 1 to end
+        final int max_cars=1000000000;      
+        int [] sum_arr=new int[A.length];
+        //create the sum array o(n)//
+
+        int sum_west_cars=0;
+        for(int i=A.length-1;i>=0; i--)
+        {
+            sum_west_cars+=A[i];
+            sum_arr[i]=sum_west_cars;
+        }
+
+        int passing_cars=0;
+        for(int i=0;i<A.length; i++)
+        {
+            if (A[i]==0){
+                passing_cars+=sum_arr[i];
+                }
+            if(passing_cars>max_cars)
+                return -1;
+            
+        }//for
+
+        return Math.max(0,passing_cars);
+    }
+}
