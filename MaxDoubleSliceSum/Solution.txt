@@ -1,0 +1,46 @@
+// you can // you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        int []lr=new int [A.length];
+        int []rl=new int [A.length];
+        int max=0;
+        if (A.length>1)
+        {
+           lr[0]=0 ;
+           rl[0]=0 ;
+           lr[A.length-1]=0;
+           rl[A.length-1]=0;
+        }
+
+        //initialize prefix sum for both sides
+        for (int i = 1; i < A.length-1; i++)  
+        {
+            lr[i]=max(0,A[i]+lr[i-1]);
+        }
+        for (int i = A.length-2; i>0; i--)  
+        {
+            rl[i]=max(0,A[i]+rl[i+1]);
+            
+        }
+
+        for (int i = 0; i < A.length-2; i++)   
+        {
+            int tmp=lr[i]+rl[i+2];//in order to skip Y index
+            max=max(max,tmp);
+        }
+
+
+     return max;
+    }
+
+        public int max(int a,int b) {
+      return (a>b? a:b);
+    }
+
+}

@@ -1,0 +1,105 @@
+// you can also use imports, for example:
+ import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int[] solution(int[] A) {
+        
+        // write your code in Java SE 8
+        int [] result=new int[A.length];
+        if(A.length==0) return result;
+
+        HashMap <Integer,Integer> occurences=new HashMap <Integer,Integer>();   
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<A.length;i++)
+        {
+            int tmp=A[i];
+             if(occurences.containsKey(tmp))
+             {
+                int count=occurences.get(tmp)+1;
+                occurences.put(tmp,count);
+             }   
+            else
+            {
+                occurences.put(tmp,1);
+            }
+            if(tmp>max)
+            max=tmp;
+        }
+    
+        //print_arr(occurences);   
+
+        HashMap<Integer,ArrayList<Integer>> divisors=new HashMap<Integer,ArrayList<Integer>>();
+        for(int i=1;i<=max;i++)
+        {
+           // System.out.print(i+"-----");
+            if(occurences.containsKey(i))
+            {
+                //System.out.println("i= " + i );
+                int k=i;  
+                while(k<=max)
+                {   
+                    if(occurences.containsKey(k))
+                    {
+                        if(divisors.containsKey(k))
+                        {
+                            divisors.get(k).add(i);
+                        }
+                        else{
+                            ArrayList<Integer>tmp=new ArrayList<Integer>();
+                            tmp.add(i);
+                        divisors.put(k,tmp) ;
+                        }
+                 }
+                    k+=i;      
+                }  
+
+                if(occurences.get(i)>1)
+                  {
+                    int count=occurences.get(i)-1;
+                    occurences.put(i,count);
+                    i--;
+                    }
+            }
+             
+        }
+        /*
+         for (Integer s : divisors.keySet()) {
+         System.out.println("key= " + s + ", value= " + divisors.get(s));
+            }
+        */
+
+        for(int i=0;i<A.length;i++)
+        {
+            int place=A[i];
+            int occur=occurences.get(place);
+            int count =divisors.get(A[i]).size();
+            //System.out.println("place= " + place );
+            //System.out.println("occur= " + occur );
+            //System.out.println("count= " + count );
+            result[i]=A.length-count;
+            if(occur>1)
+                result[i]=result[i]-occur+1;
+    
+        }
+
+
+
+
+        return result;
+
+    }
+
+    	//print 1 dimension array
+	public void print_arr(int [] arr)
+	{
+	for (int i = 0; i < arr.length; i++)  
+	{
+		System.out.print(arr[i]+", "); 
+		//System.out.println(", "); 
+	}
+	System.out.println(" "); 
+	}
+}

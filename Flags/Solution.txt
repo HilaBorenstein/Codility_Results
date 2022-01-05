@@ -1,0 +1,60 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+        // write your code in Java SE 8
+        int  count_peaks=0;
+        int max_flags=0;
+        boolean [] peaks=new boolean[A.length];
+
+        for (int i = 1; i < A.length-1; i++)  
+    	{
+            if((A[i]>A[i-1])&& (A[i]>A[i+1]))
+            {
+                peaks[i]=true;
+                count_peaks++;           
+            }         
+        }
+        int[] peaks_indexes= new int [count_peaks];
+        
+        for (int i = 1, tmp=0; i < peaks.length-1; i++)  
+    	{
+            if(peaks[i])
+            {
+                peaks_indexes[tmp] =i;
+                tmp++;              
+            }         
+        }
+
+
+         for (int flags = 1; flags <=count_peaks; flags++)  
+    	{
+            int last_flag_pos=peaks_indexes[0];
+            int index=1;
+            int distance=flags;
+            int count_cur_flags=1;
+            while((index<peaks_indexes.length)&&(count_cur_flags<flags))
+            {
+                if ((peaks_indexes[index]-last_flag_pos)>=distance)
+                {
+                    count_cur_flags++;
+                    last_flag_pos=peaks_indexes[index];
+                }
+                index++;
+            }
+
+            if(count_cur_flags==flags)
+                max_flags=flags;
+
+        }
+
+        return max_flags;
+    }
+
+
+
+}

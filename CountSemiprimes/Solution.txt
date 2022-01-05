@@ -1,0 +1,104 @@
+// you can also use imports, for example:
+ import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int[] solution(int N, int[] P, int[] Q) {
+        // write your code in Java SE 8
+        int [] result=new int[P.length];
+        //find min and max and create arraylist of primes until sqrtN
+        int min=Integer.MAX_VALUE;
+        int max=0;
+        
+        for(int i=0;i<P.length;i++)
+        {
+           if(P[i]<min)
+                min=P[i];
+           if(Q[i]>max)
+                max=Q[i] ;   
+        }
+        int sqrtN=(int)Math.sqrt(max);
+        //System.out.print(max+", "); 
+        //System.out.print(sqrtN+", "); 
+        if(max==1)
+            return result;
+
+        boolean [] primes=new boolean[max/2+1];
+        ArrayList <Integer> primes1=new ArrayList<Integer>();
+        //for(int i=1;i<primes.length;i++){primes[i]=true;}
+        for(int i=2;i<=max/2;i++)
+        {
+            if(!primes[i])
+            {
+                primes1.add(i);
+                int k=i+i;
+                while(k<=max/2)
+                {
+                    primes[k]=true;
+                    k+=i;
+                }
+            }
+        }
+        
+        //print_arr(primes);
+        int [] count_primes_div=new int[max+1];
+        System.out.println(primes1); 
+
+        for(int i=0;i<primes1.size();i++)
+        {
+            int mult= primes1.get(i);
+            //System.out.println(mult+" --------");
+            for(int mult2=i;(mult2<primes1.size())&&(primes1.get(mult2)*mult<=max);mult2++)
+            {
+                //ystem.out.println(primes1.get(mult2)+" ");
+                int res=mult*primes1.get(mult2);
+                //System.out.println(res);
+                if (res<=max)
+                    count_primes_div[res]=1;
+            }
+
+        }
+        //print_arr(count_primes_div);
+
+        for(int i=1;i<count_primes_div.length;i++)
+        {
+            count_primes_div[i]+=count_primes_div[i-1];
+        }
+        //print_arr(count_primes_div);
+
+        for(int i=0;i<P.length;i++)
+        {
+           int low=P[i];
+           int high=Q[i];
+           result[i]=count_primes_div[high]-count_primes_div[low-1];
+
+        }
+
+
+       
+
+        return result;
+    }
+
+    /************************************************************/
+	//print 1 dimension array
+	public void print_arr(int [] arr)
+	{
+	for (int i = 0; i < arr.length; i++)  
+	{
+		System.out.print(arr[i]+", "); 
+		//System.out.println(", "); 
+	}
+	System.out.println(" "); 
+	}
+}
+
+
+
+//(26, [1, 4, 16], [26, 10, 20])
+
+
+
+

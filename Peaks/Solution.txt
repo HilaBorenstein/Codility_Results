@@ -1,0 +1,77 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A) {
+
+        if(A.length<=2)
+        return 0;
+
+        int sqrtN=(int) Math.sqrt(A.length);
+        int count_peaks=0;
+        int [] peaks= new int[A.length];
+        int max_div=0;
+
+        for(int i=1;i<A.length-1;i++)
+        {
+            if((A[i]>A[i-1])&&(A[i]>A[i+1]))
+            {
+                peaks[i]=1;
+                count_peaks++;
+            }    
+            peaks[i]+=peaks[i-1];       
+        }
+        peaks[peaks.length-1]+=peaks[peaks.length-2];//for last index
+        //print_arr(peaks);
+
+
+        for(int i=1;i<=count_peaks;i++)
+        {
+            if(A.length%i==0)
+            {
+                if(checkIfDivSatisfy(peaks,i))
+                max_div=i;
+            }
+        }
+        return max_div;
+    }
+
+        public boolean checkIfDivSatisfy(int[] peaks,int div)
+        {
+            int div2=peaks.length/div;
+            int start=0;
+            int end=div2;
+            boolean haspeaks=true;;
+            while(end<=peaks.length)
+            {
+               // System.out.println("-i--"+div); 
+                //System.out.print("start "+start+",end "+end+";"); 
+                //System.out.println("\n---"); 
+                if ((start==0) &&((peaks[end-1]-peaks[start])==0))
+                    haspeaks=false;
+                //special case peak in the left edge
+                if((start!=0) && ((peaks[end-1]-peaks[start-1])==0))
+                    haspeaks=false;
+                if(!haspeaks)
+                    break;
+
+                start+=div2;
+                end+=div2;
+            }
+            return haspeaks;    
+        }
+
+    	//print 1 dimension array
+	    public void print_arr(int [] arr)
+        {
+        for (int i = 0; i < arr.length; i++)  
+            {
+                System.out.print(arr[i]+", "); 
+                //System.out.println(", "); 
+            }
+        System.out.println(" "); 
+        }
+}

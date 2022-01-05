@@ -1,0 +1,31 @@
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int N, int M) {
+        // write your code in Java SE 8
+        int gcd=gcd(N,M);
+        int res=N/gcd;
+        //the calculation should be ((N*M)/gcd )/M which is N/gcd
+        return res;
+
+    }
+
+
+
+    public int gcd(int N, int M) {
+        // write your code in Java SE 8
+        if(M==0)
+            return N;
+        return gcd (M,N%M);
+    }
+
+
+}
+
+//(947853,4453)
+//(415633212,234332)
+

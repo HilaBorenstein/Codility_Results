@@ -1,0 +1,56 @@
+// you can also use imports, for example:
+ import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int[] A, int[] B) {
+
+        int count=0;
+
+         for(int i=0;i<A.length;i++)
+        {
+            boolean res=false;
+            if(A[i]==B[i])
+            {
+                res=true;
+                count++; 
+            }
+             
+            else if(!((A[i]==1)||(B[i]==1)))
+            {
+            int high=A[i];
+            int low=B[i];
+            int gcd= gcd(high,low);
+            while(gcd(high,gcd)!=1)
+            {
+                high/=gcd(high,gcd);
+            }
+             while(gcd(low,gcd)!=1)
+            {
+                low/=gcd(low,gcd);
+            }
+            if((low==1)&&(high==1))
+                count++;
+
+
+
+            }
+
+        }
+
+        
+
+    return count;
+
+    }
+    public  int gcd(int a,int b)
+    {
+        if(b==0)
+        return a;
+        return gcd(b,a%b);
+    }
+
+
+}

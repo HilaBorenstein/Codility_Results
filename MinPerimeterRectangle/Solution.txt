@@ -1,0 +1,26 @@
+// you can also use imports, for example:
+ import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int N) {
+        int min_perimeter= Integer.MAX_VALUE;
+        // write your code in Java SE 8
+        int sqrtN=(int)Math.sqrt(N);
+        for(int i=1;i<=sqrtN;i++)
+        {
+            if(N%i==0)
+            {;
+                int cur_perimeter=2*((N/i)+i);
+                if (cur_perimeter<min_perimeter)
+                    min_perimeter=cur_perimeter;
+            }
+        }
+
+        if(min_perimeter== Integer.MAX_VALUE)
+            min_perimeter=0;
+        return min_perimeter;
+    }
+}

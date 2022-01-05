@@ -1,0 +1,24 @@
+
+
+// you can also use imports, for example:
+// import java.util.*;
+
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
+class Solution {
+    public int solution(int N) {
+        int count=0;
+        int sqrtN = (int) Math.sqrt(N); 
+        // write your code in Java SE 8
+        for(int i=1;i<=sqrtN;i++)
+        {
+            if(N%i==0)
+                count+=2;//because i*x=N
+        }
+        if(sqrtN*sqrtN==N)
+            count-=1;
+        return count;
+
+    }
+}
